@@ -9,6 +9,9 @@ trigger:
 pool:
   vmImage: 'windows-latest'
 
+variables:
+  directory: poc
+
 steps:
 - task: NodeTool@0
   inputs:
@@ -17,12 +20,12 @@ steps:
 
 - script: |
     npm install
-    workingDirectory: Backend_Frontend
+    workingDirectory: $(directory)
     displayName: 'frontend install dependencies'
 
 - script: npm run build:staging
-  workingDirectory: $(Agent.BuildDirectory)
-  displayName: '$(Build.SourceDirectory) frontend staging build'
+  workingDirectory: $(directory)
+  displayName: '$ frontend staging build'
 - task: ArchiveFiles@2
   inputs:  
     rootFolderOrFile: '$(Agent.BuildDirectory)/build' 
