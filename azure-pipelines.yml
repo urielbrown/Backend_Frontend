@@ -20,9 +20,10 @@ steps:
     workingDirectory: Backend_Frontend
     displayName: 'frontend install dependencies'
 
+- script: echo $(Build.SourceDirectory)
 - script: npm run build:staging
-  workingDirectory: Backend_Frontend
-  displayName: 'frontend staging build'
+  workingDirectory: $(Build.SourceDirectory)
+  displayName: '$(Build.SourceDirectory) frontend staging build'
 - task: ArchiveFiles@2
   inputs:  
     rootFolderOrFile: 'Backend_Frontend/build' 
