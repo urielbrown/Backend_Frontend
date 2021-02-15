@@ -17,37 +17,37 @@ steps:
 
 - script: |
     npm install
-    workingDirectory: frontend
+    workingDirectory: Backend_Frontend
     displayName: 'frontend install dependencies'
 
 - script: npm run build:staging
-  workingDirectory: frontend
+  workingDirectory: Backend_Frontend
   displayName: 'frontend staging build'
 - task: ArchiveFiles@2
   inputs:  
-    rootFolderOrFile: 'frontend/build' 
+    rootFolderOrFile: 'Backend_Frontend/build' 
     includeRootFolder: false
     archiveType: zip
     archiveFile: '$(Build.ArtifactStagingDirectory)/frontend-staging/build.zip'
     replaceExistingArchive: true 
-  displayName: 'frontend staging zip files'
+  displayName: 'Backend_Frontend staging zip files'
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)/frontend-staging'
     ArtifactName: 'frontend-staging'
-  displayName: 'frontend staging publish to pipeline'
+  displayName: 'Backend_Frontend staging publish to pipeline'
 
 - script: npm run build:production
-  workingDirectory: frontend
-  displayName: 'frontend production build'
+  workingDirectory: Backend_Frontend
+  displayName: 'Backend_Frontend production build'
 - task: ArchiveFiles@2
   inputs:  
-    rootFolderOrFile: 'frontend/build' 
+    rootFolderOrFile: 'Backend_Frontend/build' 
     includeRootFolder: false
     archiveType: zip
     archiveFile: '$(Build.ArtifactStagingDirectory)/frontend-production/build.zip'
     replaceExistingArchive: true 
-  displayName: 'frontend production zip files'
+  displayName: 'Backend_Frontend production zip files'
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)/frontend-production'
@@ -55,19 +55,19 @@ steps:
   displayName: 'frontend production publish to pipeline'
 
 - script: npm run build
-  workingDirectory: frontend
-  displayName: 'frontend dev build'
+  workingDirectory: Backend_Frontend
+  displayName: 'Backend_Frontend dev build'
 - task: ArchiveFiles@2
   inputs:  
-    rootFolderOrFile: 'frontend/build' 
+    rootFolderOrFile: 'Backend_Frontend/build' 
     includeRootFolder: false
     archiveType: zip
     archiveFile: '$(Build.ArtifactStagingDirectory)/frontend-dev/build.zip'
     replaceExistingArchive: true 
-  displayName: 'frontend dev zip files'
+  displayName: 'Backend_Frontend dev zip files'
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)/frontend-dev'
     ArtifactName: 'frontend-dev'
-  displayName: 'frontend dev publish to pipeline'
+  displayName: 'Backend_Frontend dev publish to pipeline'
 
